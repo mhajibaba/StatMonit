@@ -1,0 +1,76 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.pec.mob.statmonit2.layout.DashboardFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnBanks"
+                style="@style/HomeButton"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_assessment_black_100dp"
+                android:text="@string/dash_banks" />
+
+            <Button
+                android:id="@+id/btnMobile"
+                style="@style/HomeButton"
+                android:drawableTop="@drawable/ic_phone_android_black_100dp"
+                android:layout_weight="1"
+                android:text="@string/dash_mobile" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnTransStat"
+                style="@style/HomeButton"
+                android:drawableTop="@drawable/ic_credit_card_black_100dp"
+                android:layout_weight="1"
+                android:text="@string/dash_stat" />
+
+            <Button
+                android:id="@+id/btnInstallation"
+                style="@style/HomeButton"
+                android:drawableTop="@drawable/ic_assignment_turned_in_black_100dp"
+                android:layout_weight="1"
+                android:text="@string/dash_install" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnAgencies"
+                style="@style/HomeButton"
+                android:drawableTop="@drawable/ic_business_black_100dp"
+                android:layout_weight="1"
+                android:text="@string/dash_agency" />
+
+            <Button
+                android:id="@+id/btnInspection"
+                style="@style/HomeButton"
+                android:drawableTop="@drawable/ic_visibility_black_100dp"
+                android:layout_weight="1"
+                android:text="@string/dash_inspect" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

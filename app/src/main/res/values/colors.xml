@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="orange">#FFA500</color>
+    <color name="accent">#FF4081</color>
+
+    <color name="blue1">#5555ff</color>
+    <color name="blue2">#2a6d82</color>
+    <color name="blue3">#76aeaf</color>
+    <color name="blue4">#88b4bb</color>
+    <color name="blue5">#94d4d4</color>
+    <color name="blue6">#cff8f6</color>
+
+    <color name="red1">#ff0000</color>
+    <color name="red2">#c12552</color>
+    <color name="green2">#6aa786</color>
+    <color name="blue_green">#35c2d1</color>
+
+    <array name="blue_2colors">
+        <item>@color/blue1</item>
+        <item>@color/blue6</item>
+    </array>
+    <array name="blue_red_colors">
+        <item>@color/blue_green</item>
+        <item>@color/red2</item>
+    </array>
+
+    <color name="title_background">#ff222222</color>
+    <color name="foreground1">#ff355689</color>
+
+    <color name="btnStart">#88a0a0a0</color>
+    <color name="btnEnd">#88afafaf</color>
+    <color name="btnCenter">#88e0e0e0</color>
+
+</resources>

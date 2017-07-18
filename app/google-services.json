@@ -1,0 +1,71 @@
+{
+  "project_info": {
+    "project_number": "1053299469284",
+    "project_id": "parsian-monit"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053299469284:android:8c9ee1bc16414d14",
+        "android_client_info": {
+          "package_name": "com.pec.mob.statmonit2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053299469284-ju548k9cjb2a2o2akcpdtlqug7lv4qvg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzDa2BR1EtMu_hp4MXypCqJWtSmfyHCnM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053299469284:android:cdf24db5d3f1c9f0",
+        "android_client_info": {
+          "package_name": "com.pec.mob.statmonit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053299469284-ju548k9cjb2a2o2akcpdtlqug7lv4qvg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzDa2BR1EtMu_hp4MXypCqJWtSmfyHCnM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

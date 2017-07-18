@@ -1,0 +1,94 @@
+<resources>
+    <string name="app_name">پارسیان مانیت</string>
+
+    <!-- Strings related to bottom navigation -->
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_home">Home</string>
+    <string name="title_notify">Notifications</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- Strings related to dashboard -->
+    <string name="dash_banks">وضعیت بانک ها</string>
+    <string name="dash_stat">نوع تراکنش ها</string>
+    <string name="dash_mobile">موبایل</string>
+    <string name="dash_agency">نمایندگی ها</string>
+    <string name="dash_inspect">بازرسی</string>
+    <string name="dash_install">نصب و فسخ</string>
+
+    <!-- Strings related to inspections -->
+    <string name="inspect_title">نام نمایندگی</string>
+    <string name="inspect_done">بازرسی های انجام شده</string>
+    <string name="inspect_nodone">بازرسی های انجام نشده</string>
+    <string name="inspect_total">کل</string>
+
+    <!-- Strings related to installations -->
+    <string name="install_title">نام نمایندگی</string>
+    <string name="install_install">نصب ها</string>
+    <string name="install_uninstall">فسخ ها</string>
+
+    <!-- Strings related to agency -->
+    <string name="agency_title">نام نمایندگی</string>
+    <string name="agency_id">شناسه</string>
+    <string name="agency_count">تعداد تراکنش های موفق</string>
+
+    <!-- Strings related to banks -->
+    <string name="bank_totcnt">تعداد کل تراکنش ها</string>
+    <string name="bank_iin">شناسه بانک صادر کننده</string>
+    <string name="bank_sccnt">تعداد تراکنش های موفق</string>
+    <string name="bank_scperc">درصد تراکنش های موفق</string>
+    <string name="bank_rejcnt">تعداد تراکنش های ناموفق</string>
+    <string name="bank_rejperc">درصد تراکنش های ناموفق</string>
+    <string name="bank_USrejcnt">تعداد تراکنش های ناموفق کاربر</string>
+    <string name="bank_issrejcnt">تعداد تراکنش های ناموفق بانک صادر کننده</string>
+    <string name="bank_issStableperc">درصد پایداری بانک صادر کننده</string>
+    <string name="bank_avgtxntime">میانگین زمان پاسخگویی</string>
+    <string name="bank_mintxntime">کمترین زمان پاسخگویی</string>
+    <string name="bank_maxtxntime">بیشترین زمان پاسخگویی</string>
+
+    <!-- Strings related to Rise Fall -->
+    <string name="rf_name">نام پایانه</string>
+    <string name="rf_number">شماره پایانه</string>
+    <string name="rf_cnt">تعداد تراکنش های امروز</string>
+    <string name="rf_oneDayCnt">تعداد تراکنش های روز قبل</string>
+    <string name="rf_twoDayCnt">تعداد تراکنش های دو روز قبل</string>
+    <string name="rf_threeDayCnt">تعداد تراکنش های سه روز قبل</string>
+    <string name="rf_weekCnt">تعداد تراکنش های مدت مشابه هفته قبل</string>
+    <string name="rf_monthCnt">تعداد تراکنش های مدت مشابه ماه قبل</string>
+    <string name="rf_average">میانگین تراکنش ها</string>
+    <string name="rf_tolerance">نوسانات</string>
+    <string name="rf_advantage">سود دهی</string>
+
+    <string name="exit">خروج</string>
+
+    <string name="title_banks">حجم بانک ها</string>
+    <string name="text_banks">حجم معاملات به تفکیک بانک</string>
+    <string name="text_rise_fall">افت و خیز دستگاه های POS</string>
+    <string name="text_inspection">تعداد بازرسی به تفکیک نمایندگی</string>
+    <string name="text_install">تعداد نصب و فسخ به تفکیک نمایندگی</string>
+    <string name="text_agencies">تعداد تراکنش به تفکیک نمایندگی</string>
+    <string name="msg_exit">برای خروج کلیک کنید</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_authentication">Username and/or password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_agentitem_list">Agent Items</string>
+    <string name="title_agentitem_detail">Agent Item Detail</string>
+</resources>
