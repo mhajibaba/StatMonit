@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             if (username != null && password != null) {
                 long lastLogin = sharedPref.getLong("lastLogin", 0);
                 boolean success;
-                if (System.currentTimeMillis() - lastLogin > 1000) {
+                if (System.currentTimeMillis() - lastLogin > 60 * 60 * 1000) {
                     try {
                         mAuthTask = new UserLoginTask(username, password);
                         mAuthTask.execute((Void) null);
