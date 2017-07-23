@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -17,11 +18,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.pec.mob.statmonit.R;
+import com.pec.mob.statmonit.util.RESTExecutor;
+import com.pec.mob.statmonit.util.Rest;
 
 import java.io.File;
 
@@ -68,6 +72,14 @@ public class MainActivity extends AppCompatActivity
             setupNavigationView(b);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(!checkLogin()){
+            finish();
         }
     }
 
@@ -148,8 +160,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void logOut() {
-        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
+        String token = sharedPreferences.getString("token",null);
+        if(token!=null) {
+            new UnregisterTask(token).execute();
+        }
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.commit();
         finish();
@@ -228,5 +244,45 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    private boolean checkLogin() {
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
+        String username = sharedPref.getString("username", null);
+        String password = sharedPref.getString("password", null);
+
+        if (username != null && password != null) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    class UnregisterTask extends AsyncTask<String, Integer, Boolean> {
+        String token;
+
+        public UnregisterTask(String token) {
+            this.token = token;
+        }
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+            try {
+                String url = "https://report.pec.ir:444/api/acc/logout?token=" + token;
+                String response = Rest.get(url);
+                boolean b = Boolean.parseBoolean(response.trim());
+                if (b) {
+                    Log.d(TAG,"Unregister Token Successfully");
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.d(TAG, e.getMessage());
+                return false;
+            }
+        }
     }
 }

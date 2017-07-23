@@ -34,6 +34,7 @@ public class RegistrationService extends IntentService {
                 SharedPreferences sharedPref = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putBoolean("RegisteredNotification", true);
+                editor.putString("token", registrationToken);
                 editor.commit();
             }
             //GcmPubSub subscription = GcmPubSub.getInstance(this);
