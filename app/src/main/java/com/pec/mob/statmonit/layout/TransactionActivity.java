@@ -1,5 +1,6 @@
 package com.pec.mob.statmonit.layout;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -82,11 +83,8 @@ public class TransactionActivity extends AppCompatActivity {
     }
 
     private void getData() throws Exception{
-        Gson gson = new GsonBuilder().create();
-        List<Object> jsonDataList;
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        long updateDate = sharedPreferences.getLong("date",0);
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);        SharedPreferences.Editor editor = sharedPreferences.edit();
+        long updateDate = sharedPreferences.getLong(TAG+"date",0);
         boolean needUpdate = false;
         if(updateDate!=0) {
             if(System.currentTimeMillis()-updateDate>timeInterval) {
@@ -96,17 +94,20 @@ public class TransactionActivity extends AppCompatActivity {
             needUpdate = true;
         }
 
+        Gson gson = new GsonBuilder().create();
+        List<Object> jsonDataList;
+
         if(needUpdate) {
             Log.i(TAG, "Connect to server to retrieve data");
             DataSet dataSet = new DataSet();
             jsonDataList = dataSet.getItemValues(Agent.getItemidForChart(ChartType.Bubble_Trans), ValueType._String, 1);
             if (jsonDataList != null) {
-                editor.putString("data", gson.toJson(jsonDataList));
-                editor.putLong("date", System.currentTimeMillis());
+                editor.putString(TAG+"data", gson.toJson(jsonDataList));
+                editor.putLong(TAG+"date", System.currentTimeMillis());
             }
         }else {
             Log.i(TAG, "Get data from shared preferences");
-            String jsonSavedDataSet = sharedPreferences.getString("data",null);
+            String jsonSavedDataSet = sharedPreferences.getString(TAG+"data",null);
             jsonDataList = gson.fromJson(jsonSavedDataSet,(new ArrayList<>().getClass()));
         }
 

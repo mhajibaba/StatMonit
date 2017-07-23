@@ -148,9 +148,9 @@ public class HomeFragment extends Fragment {
     }
 
     private void getData() throws Exception{
-        SharedPreferences sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        long updateDate = sharedPreferences.getLong("date",0);
+        long updateDate = sharedPreferences.getLong(TAG+"date",0);
         boolean needUpdate = false;
         if(updateDate!=0) {
             if(System.currentTimeMillis()-updateDate>timeInterval) {
@@ -167,16 +167,7 @@ public class HomeFragment extends Fragment {
         if(needUpdate) {
             Log.i(TAG, "Connect to server to retrieve data");
             DataSet dataset = new DataSet();
-            //================Update Total Pie========================//
-            /*Rest.setCredential("reza@pec.ir", "Aa123456.");
-            String agentItemsJson = dataset.authenticateAndGetAgentItems("reza@pec.ir", "Aa123456.");
 
-            Gson gson2 = new GsonBuilder().create();
-            AgentItem[] agentItems = gson2.fromJson(agentItemsJson, AgentItem[].class);
-            if(agentItems!=null) {
-                Agent.setItems(agentItems);
-            }
-*/
             int itemPieSucc = Agent.getItemidForChart(ChartType.Pie_Left_succ);
             if(itemPieSucc>0) {
                 succTotal = dataset.getItemValue(itemPieSucc);
@@ -186,8 +177,8 @@ public class HomeFragment extends Fragment {
                 unsuccTotal = dataset.getItemValue(itemPieUnsucc);
             }
             if (succTotal != null && unsuccTotal != null) {
-                editor.putLong("SucTotal", succTotal);
-                editor.putLong("UnsucTotal", unsuccTotal);
+                editor.putLong(TAG+"SucTotal", succTotal);
+                editor.putLong(TAG+"UnsucTotal", unsuccTotal);
                 editor.commit();
             }
 
@@ -201,8 +192,8 @@ public class HomeFragment extends Fragment {
                 unsuccAmount = dataset.getItemValue(itemPieUnsuccAmount);
             }
             if (succAmount != null && unsuccAmount != null) {
-                editor.putLong("SucAmount", succAmount);
-                editor.putLong("UnsucAmount", unsuccAmount);
+                editor.putLong(TAG+"SucAmount", succAmount);
+                editor.putLong(TAG+"UnsucAmount", unsuccAmount);
                 editor.commit();
             }
 
@@ -216,24 +207,23 @@ public class HomeFragment extends Fragment {
                 successArray = dataset.getItemValues(itemBarSucc, 10);
             }
             if (unSuccessArray != null && successArray!=null) {
-                editor.putString("SucArray", gson.toJson(successArray));
-                editor.putString("UnsucArray", gson.toJson(unSuccessArray));
-                editor.putLong("date", System.currentTimeMillis());
+                editor.putString(TAG+"SucArray", gson.toJson(successArray));
+                editor.putString(TAG+"UnsucArray", gson.toJson(unSuccessArray));
+                editor.putLong(TAG+"date", System.currentTimeMillis());
                 editor.commit();
             }
-
         }
         else {
             Log.i(TAG, "Get data from shared preferences");
 
-            succTotal = sharedPreferences.getLong("SucTotal", 0);
-            unsuccTotal = sharedPreferences.getLong("UnsucTotal", 0);
+            succTotal = sharedPreferences.getLong(TAG+"SucTotal", 0);
+            unsuccTotal = sharedPreferences.getLong(TAG+"UnsucTotal", 0);
 
-            succAmount = sharedPreferences.getLong("SucAmount", 0);
-            unsuccAmount = sharedPreferences.getLong("UnsucAmount", 0);
+            succAmount = sharedPreferences.getLong(TAG+"SucAmount", 0);
+            unsuccAmount = sharedPreferences.getLong(TAG+"UnsucAmount", 0);
 
-            successArray = gson.fromJson(sharedPreferences.getString("SucArray", null), Item[].class);
-            unSuccessArray = gson.fromJson(sharedPreferences.getString("UnsucArray", null), Item[].class);
+            successArray = gson.fromJson(sharedPreferences.getString(TAG+"SucArray", null), Item[].class);
+            unSuccessArray = gson.fromJson(sharedPreferences.getString(TAG+"UnsucArray", null), Item[].class);
         }
 
         if (succTotal != null && unsuccTotal != null) {

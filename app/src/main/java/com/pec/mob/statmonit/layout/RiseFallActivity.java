@@ -1,6 +1,7 @@
 package com.pec.mob.statmonit.layout;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -92,9 +93,9 @@ public class RiseFallActivity extends AppCompatActivity {
 
 
     private void getData() throws Exception{
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        long updateDate = sharedPreferences.getLong("date", 0);
+        long updateDate = sharedPreferences.getLong(TAG+"date", 0);
         boolean needUpdate = false;
         if (updateDate != 0) {
             if (System.currentTimeMillis() - updateDate > timeInterval) {
@@ -111,14 +112,14 @@ public class RiseFallActivity extends AppCompatActivity {
             jsonDataRise = (String) dataSet.getItemValue(Agent.getItemidForChart(ChartType.Bar_Rise), ValueType._String);
             jsonDataFall = (String) dataSet.getItemValue(Agent.getItemidForChart(ChartType.Bar_Fall), ValueType._String);
             if (jsonDataRise != null || jsonDataFall != null) {
-                editor.putString("dataRise", jsonDataRise);
-                editor.putString("dataFall", jsonDataFall);
-                editor.putLong("date", System.currentTimeMillis());
+                editor.putString(TAG+"dataRise", jsonDataRise);
+                editor.putString(TAG+"dataFall", jsonDataFall);
+                editor.putLong(TAG+"date", System.currentTimeMillis());
             }
         } else {
             Log.i(TAG, "Get data from shared preferences");
-            jsonDataRise = sharedPreferences.getString("dataRise", null);
-            jsonDataFall = sharedPreferences.getString("dataFall", null);
+            jsonDataRise = sharedPreferences.getString(TAG+"dataRise", null);
+            jsonDataFall = sharedPreferences.getString(TAG+"dataFall", null);
         }
 
         Gson gson = new GsonBuilder().create();

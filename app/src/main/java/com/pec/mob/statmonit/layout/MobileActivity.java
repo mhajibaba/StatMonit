@@ -1,5 +1,6 @@
 package com.pec.mob.statmonit.layout;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
@@ -90,9 +91,9 @@ public class MobileActivity extends AppCompatActivity {
     }
 
     private void getData() throws Exception{
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        long updateDate = sharedPreferences.getLong("date", 0);
+        long updateDate = sharedPreferences.getLong(TAG+"date", 0);
         boolean needUpdate = false;
         if (updateDate != 0) {
             if (System.currentTimeMillis() - updateDate > timeInterval) {
@@ -112,30 +113,30 @@ public class MobileActivity extends AppCompatActivity {
             pie_star7 = (Long) dataSet.getItemValue(Agent.getItemidForChart(ChartType.Pie_Mob_7), ValueType._Integer);
             pie_starTop = (Long) dataSet.getItemValue(Agent.getItemidForChart(ChartType.Pie_Mob_top), ValueType._Integer);
             if (pie_star1 != null && pie_star7 != null && pie_starTop!=null) {
-                editor.putLong("pie1", pie_star1);
-                editor.putLong("pie7", pie_star7);
-                editor.putLong("pieTop", pie_starTop);
-                editor.putLong("date", System.currentTimeMillis());
+                editor.putLong(TAG+"pie1", pie_star1);
+                editor.putLong(TAG+"pie7", pie_star7);
+                editor.putLong(TAG+"pieTop", pie_starTop);
+                editor.putLong(TAG+"date", System.currentTimeMillis());
                 editor.commit();
             }
             line_star1 = dataSet.getItemValues(Agent.getItemidForChart(ChartType.Bar_Mob_1), 10);
             line_star7 = dataSet.getItemValues(Agent.getItemidForChart(ChartType.Bar_Mob_7), 10);
             line_starTop = dataSet.getItemValues(Agent.getItemidForChart(ChartType.Bar_Mob_top), 10);
             if (line_star1 != null && line_starTop != null && line_starTop!=null) {
-                editor.putString("line1", gson.toJson(line_star1));
-                editor.putString("line7", gson.toJson(line_star7));
-                editor.putString("lineTop", gson.toJson(line_starTop));
+                editor.putString(TAG+"line1", gson.toJson(line_star1));
+                editor.putString(TAG+"line7", gson.toJson(line_star7));
+                editor.putString(TAG+"lineTop", gson.toJson(line_starTop));
                 editor.commit();
             }
         } else {
             Log.i(TAG, "Get data from shared preferences");
-            pie_star1 = sharedPreferences.getLong("pie1", 0);
-            pie_star7 = sharedPreferences.getLong("pie7", 0);
-            pie_starTop = sharedPreferences.getLong("pieTop", 0);
+            pie_star1 = sharedPreferences.getLong(TAG+"pie1", 0);
+            pie_star7 = sharedPreferences.getLong(TAG+"pie7", 0);
+            pie_starTop = sharedPreferences.getLong(TAG+"pieTop", 0);
 
-            line_star1 = gson.fromJson(sharedPreferences.getString("line1", null), Item[].class);
-            line_star7 = gson.fromJson(sharedPreferences.getString("line7", null), Item[].class);
-            line_starTop = gson.fromJson(sharedPreferences.getString("lineTop", null), Item[].class);
+            line_star1 = gson.fromJson(sharedPreferences.getString(TAG+"line1", null), Item[].class);
+            line_star7 = gson.fromJson(sharedPreferences.getString(TAG+"line7", null), Item[].class);
+            line_starTop = gson.fromJson(sharedPreferences.getString(TAG+"lineTop", null), Item[].class);
         }
         if(pie_star1!=null && pie_star7!=null && pie_starTop!=null) {
             entriesPieTotal.clear();

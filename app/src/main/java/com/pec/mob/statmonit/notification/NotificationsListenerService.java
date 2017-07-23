@@ -11,6 +11,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.google.android.gms.gcm.GcmListenerService;
 import com.pec.mob.statmonit.R;
+import com.pec.mob.statmonit.layout.LoginActivity;
 import com.pec.mob.statmonit.layout.MainActivity;
 
 import org.json.JSONException;
@@ -30,7 +31,7 @@ public class NotificationsListenerService extends GcmListenerService {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Intent nIntent = new Intent(this.getApplicationContext(),MainActivity.class);
+        Intent nIntent = new Intent(this.getApplicationContext(),LoginActivity.class);
         nIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 

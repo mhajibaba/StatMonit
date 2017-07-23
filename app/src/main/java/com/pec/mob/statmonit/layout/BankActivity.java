@@ -1,6 +1,7 @@
 package com.pec.mob.statmonit.layout;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -90,9 +91,9 @@ public class BankActivity extends AppCompatActivity {
 
 
     private void getData() throws Exception{
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        long updateDate = sharedPreferences.getLong("date", 0);
+        long updateDate = sharedPreferences.getLong(TAG+"date", 0);
         boolean needUpdate = false;
         if (updateDate != 0) {
             if (System.currentTimeMillis() - updateDate > timeInterval) {
@@ -108,12 +109,12 @@ public class BankActivity extends AppCompatActivity {
             DataSet dataSet = new DataSet();
             jsonData = (String) dataSet.getItemValue(Agent.getItemidForChart(ChartType.Bar_Bank), ValueType._String);
             if (jsonData != null) {
-                editor.putString("data", jsonData);
-                editor.putLong("date", System.currentTimeMillis());
+                editor.putString(TAG+"data", jsonData);
+                editor.putLong(TAG+"date", System.currentTimeMillis());
             }
         } else {
             Log.i(TAG, "Get data from shared preferences");
-            jsonData = sharedPreferences.getString("data", null);
+            jsonData = sharedPreferences.getString(TAG+"data", null);
         }
 
         Gson gson = new GsonBuilder().create();
