@@ -21,22 +21,22 @@ public class RegistrationService extends IntentService {
     private static final String TAG = RegistrationService.class.getSimpleName();
     @Override
     protected void onHandleIntent(Intent intent) {
-        InstanceID myID = InstanceID.getInstance(this);
+        InstanceID instanceID = InstanceID.getInstance(getApplicationContext());
 
         try {
-            String registrationToken = myID.getToken(
+            String registrationToken = instanceID.getToken(
                     getString(R.string.gcm_defaultSenderId),
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE,
                     null
             );
             boolean res = sendToken(registrationToken);
             if(res) {
-                SharedPreferences sharedPref = getSharedPreferences(getString(R.string.app_name)+"Notify", Context.MODE_PRIVATE);
+                SharedPreferences sharedPref = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putBoolean("RegisteredNotification", true);
                 editor.commit();
             }
-            GcmPubSub subscription = GcmPubSub.getInstance(this);
+            //GcmPubSub subscription = GcmPubSub.getInstance(this);
             //subscription.subscribe(registrationToken, "/topics/my_little_topic", null);
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,6 +46,7 @@ public class RegistrationService extends IntentService {
     private boolean sendToken(String token) {
         try {
             String url = "https://report.pec.ir:444/api/acc/registerUserToken?token=" + token;
+            Log.d(TAG,"=============>"+token+"<==============");
             String response = Rest.get(url);
             boolean b = Boolean.parseBoolean(response.trim());
             if (b) {

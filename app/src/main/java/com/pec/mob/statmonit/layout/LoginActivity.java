@@ -416,15 +416,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Gson gson = new GsonBuilder().create();
                 AgentItem[] agentItems = gson.fromJson(agentItemsJson, AgentItem[].class);
                 if(agentItems!=null) {
-                    SharedPreferences sharedPrefNotif = getSharedPreferences(getString(R.string.app_name)+"Notify",Context.MODE_PRIVATE);
                     //============Registration===================//
-                    boolean registered = sharedPrefNotif.getBoolean("RegisteredNotification",false);
+                    //Just Register if user logged out
+                    SharedPreferences sharedPref = getSharedPreferences(getString(R.string.app_name),Context.MODE_PRIVATE);
+                    boolean registered = sharedPref.getBoolean("RegisteredNotification",false);
                     if(!registered) {
                         Intent i = new Intent(LoginActivity.this, RegistrationService.class);
                         startService(i);
                     }
                     //===============================//
-                    SharedPreferences sharedPref = getSharedPreferences(getString(R.string.app_name),Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("agentItems", agentItemsJson);
                     editor.commit();
