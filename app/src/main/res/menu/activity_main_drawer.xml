@@ -15,6 +15,10 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="POS rise and fall" />
         <item
+            android:id="@+id/nav_message"
+            android:icon="@drawable/ic_message"
+            android:title="Messages" />
+        <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
             android:title="Tools" />

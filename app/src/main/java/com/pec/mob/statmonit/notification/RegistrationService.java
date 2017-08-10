@@ -46,7 +46,7 @@ public class RegistrationService extends IntentService {
 
     private boolean sendToken(String token) {
         try {
-            String url = "https://report.pec.ir:444/api/acc/registerUserToken?token=" + token;
+            String url = "https://report.pec.ir:444/api/acc/registerUserToken?ostype=1&token=" + token;
             Log.d(TAG,"=============>"+token+"<==============");
             String response = Rest.get(url);
             boolean b = Boolean.parseBoolean(response.trim());

@@ -7,15 +7,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.pec.mob.statmonit.R;
-import com.pec.mob.statmonit.object.Notification;
+import com.pec.mob.statmonit.object.Message;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotificationRecyclerViewAdapter extends RecyclerView
-        .Adapter<NotificationRecyclerViewAdapter
+public class MessageRecyclerViewAdapter extends RecyclerView
+        .Adapter<MessageRecyclerViewAdapter
         .DataObjectHolder> {
-    private List<Notification> mDataset;
+    private List<Message> mDataset;
     private static NotificationClickListener notificationClickListener;
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
@@ -43,7 +43,7 @@ public class NotificationRecyclerViewAdapter extends RecyclerView
         this.notificationClickListener = myClickListener;
     }
 
-    public NotificationRecyclerViewAdapter(List<Notification> myDataset) {
+    public MessageRecyclerViewAdapter(List<Message> myDataset) {
         if(myDataset!=null) {
             mDataset = myDataset;
         }
@@ -56,7 +56,7 @@ public class NotificationRecyclerViewAdapter extends RecyclerView
     public DataObjectHolder onCreateViewHolder(ViewGroup parent,
                                                int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.notify_card_view, parent, false);
+                .inflate(R.layout.message_card_view, parent, false);
 
         return new DataObjectHolder(view);
     }
@@ -78,7 +78,7 @@ public class NotificationRecyclerViewAdapter extends RecyclerView
         }
     }
 
-    public void addItem(Notification dataObj, int index) {
+    public void addItem(Message dataObj, int index) {
         mDataset.add(index, dataObj);
         notifyItemInserted(index);
     }

@@ -23,14 +23,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.pec.mob.statmonit.R;
+import com.pec.mob.statmonit.util.Message;
+import com.pec.mob.statmonit.util.Network;
 import com.pec.mob.statmonit.util.RESTExecutor;
 import com.pec.mob.statmonit.util.Rest;
 
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, HomeFragment.OnFragmentInteractionListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private HomeFragment homeFragment=null;
@@ -235,6 +239,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_rise_fall) {
             Intent intent = new Intent(MainActivity.this, RiseFallActivity.class);
             MainActivity.this.startActivity(intent);
+        } else if (id == R.id.nav_message) {
+            Intent intent = new Intent(MainActivity.this, MessageActivity.class);
+            MainActivity.this.startActivity(intent);
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_logout) {
@@ -252,10 +259,49 @@ public class MainActivity extends AppCompatActivity
         String username = sharedPref.getString("username", null);
         String password = sharedPref.getString("password", null);
 
+        if(!Network.isNetworkConnected(getSystemService(Context.CONNECTIVITY_SERVICE))) {
+            Message.showError(MainActivity.this,"Network is unreachable!");
+            return false;
+        }else if(!Network.isInternetAvailable()) {
+            Message.showError(MainActivity.this,"No internet access!");
+            return false;
+        }
+        else
         if (username != null && password != null) {
             return true;
         }else {
             return false;
+        }
+    }
+
+    @Override
+    public void onFragmentInteraction() {
+        try {
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    LineChart lineChart = (LineChart) findViewById(R.id.lineChartMain);
+                    if (lineChart != null && lineChart.getData()!=null) {
+                        lineChart.getData().notifyDataChanged();
+                        lineChart.notifyDataSetChanged();
+                        lineChart.invalidate();
+                    }
+                    PieChart pieChartTotal = (PieChart) findViewById(R.id.pieChartTotal);
+                    if (pieChartTotal != null && pieChartTotal.getData()!=null) {
+                        pieChartTotal.getData().notifyDataChanged();
+                        pieChartTotal.notifyDataSetChanged();
+                        pieChartTotal.invalidate();
+                    }
+                    PieChart pieChartAmount = (PieChart) findViewById(R.id.pieChartAmount);
+                    if (pieChartAmount != null && pieChartAmount.getData()!=null) {
+                        pieChartAmount.getData().notifyDataChanged();
+                        pieChartAmount.notifyDataSetChanged();
+                        pieChartAmount.invalidate();
+                    }
+                }
+            });
+        }catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 

@@ -96,7 +96,7 @@ public class MobileActivity extends AppCompatActivity {
         long updateDate = sharedPreferences.getLong(TAG+"date", 0);
         boolean needUpdate = false;
         if (updateDate != 0) {
-            if (System.currentTimeMillis() - updateDate > timeInterval) {
+            if (System.currentTimeMillis() - updateDate > timeInterval-1000) {
                 needUpdate = true;
             }
         } else {

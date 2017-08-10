@@ -47,6 +47,8 @@ import com.pec.mob.statmonit.notification.RegistrationService;
 import com.pec.mob.statmonit.object.Agent;
 import com.pec.mob.statmonit.object.AgentItem;
 import com.pec.mob.statmonit.util.DataSet;
+import com.pec.mob.statmonit.util.Message;
+import com.pec.mob.statmonit.util.Network;
 import com.pec.mob.statmonit.util.Rest;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -359,40 +361,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        return cm.getActiveNetworkInfo() != null;
-    }
-
-    private boolean isInternetAvailable() {
-        try {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-
-            InetAddress ipAddr = InetAddress.getByName("google.com");
-            return !ipAddr.equals("");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            //Log.e(TAG, e.getMessage());
-            return false;
-        }
-    }
-
-    private void showError(String msg){
-        AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
-        alertDialog.setTitle("Alert");
-        alertDialog.setMessage(msg);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
-    }
-
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -447,10 +415,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             if (success) {
                 goToMain(mEmail,mPassword);
             } else {
-                if(!isNetworkConnected()) {
-                    showError("Network is unreachable!");
-                }else if(!isInternetAvailable()) {
-                    showError("No internet access!");
+                if(!Network.isNetworkConnected(getSystemService(Context.CONNECTIVITY_SERVICE))) {
+                    Message.showError(LoginActivity.this, "Network is unreachable!");
+                }else if(!Network.isInternetAvailable()) {
+                    Message.showError(LoginActivity.this,"No internet access!");
                 }else {
                     mPasswordView.setError(getString(R.string.error_incorrect_authentication));
                     mPasswordView.requestFocus();

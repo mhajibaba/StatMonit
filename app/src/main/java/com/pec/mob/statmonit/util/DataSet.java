@@ -6,7 +6,8 @@ import com.google.gson.GsonBuilder;
 import com.pec.mob.statmonit.object.Agent;
 import com.pec.mob.statmonit.object.AgentItem;
 import com.pec.mob.statmonit.object.Item;
-import com.pec.mob.statmonit.object.Notification;
+import com.pec.mob.statmonit.object.Message;
+import com.pec.mob.statmonit.object.Notif;
 import com.pec.mob.statmonit.object.ValueType;
 
 import java.util.ArrayList;
@@ -149,12 +150,24 @@ public class DataSet{
         return items;
     }
 
-    public List<Notification> getNotifications() throws Exception{
+    public List<Message> getMessages() throws Exception{
         try {
             String request = restUri + "getusernotification?count=10";
             String json = Rest.get(request);
             Log.d(TAG,json);
-            return Arrays.asList(gson.fromJson(json, Notification[].class));
+            return Arrays.asList(gson.fromJson(json, Message[].class));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Notif> getNotifications() throws Exception{
+        try {
+            String request = restUri + "getpushhistory?count=10";
+            String json = Rest.get(request);
+            Log.d(TAG,json);
+            return Arrays.asList(gson.fromJson(json, Notif[].class));
         } catch (Exception e) {
             e.printStackTrace();
             return null;

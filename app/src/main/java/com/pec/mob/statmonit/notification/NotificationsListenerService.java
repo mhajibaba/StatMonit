@@ -13,6 +13,7 @@ import com.google.android.gms.gcm.GcmListenerService;
 import com.pec.mob.statmonit.R;
 import com.pec.mob.statmonit.layout.LoginActivity;
 import com.pec.mob.statmonit.layout.MainActivity;
+import com.pec.mob.statmonit.layout.NotificationFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,7 +32,7 @@ public class NotificationsListenerService extends GcmListenerService {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Intent nIntent = new Intent(this.getApplicationContext(),LoginActivity.class);
+        Intent nIntent = new Intent(this.getApplicationContext(),MainActivity.class);
         nIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
@@ -39,9 +40,9 @@ public class NotificationsListenerService extends GcmListenerService {
                 nIntent, 0);
         NotificationManager notificationManager= (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.ic_alert)
+                .setSmallIcon(R.drawable.ic_notification_alert)
                 .setSound(Uri.parse("android.resource://" + getPackageName()+ "/" + R.raw.alert))
-                .setContentTitle(getString(R.string.app_name))
+                .setContentTitle(title)
                 .setContentText(body)
                 .setVibrate(new long[]{1000,1000,1000,1000})
                 .setContentIntent(intent);

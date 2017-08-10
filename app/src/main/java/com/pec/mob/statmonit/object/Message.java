@@ -2,7 +2,7 @@ package com.pec.mob.statmonit.object;
 
 import com.pec.mob.statmonit.util.JalaliCalendar;
 
-public class Notification {
+public class Message {
     private String ID;
     private String Status;
     private String Type;
